@@ -143,6 +143,40 @@ bb
 ag 3344 -8
 cc 205010-2
 WELLING
+
+
+d - Mostra o dia em formato de número com dois dígitos;
+j - Mostra o dia, sem preencimento de zero à esquerda (1 a 31);
+t - Dias que contêm o mês atual (28 a 31);
+D - Mostra o dia em formato de texto três dígitos (em inglês);
+l ("L" minúsculo) - Mostra o dia em formato de texto completo (em inglês);
+w - Dia da semana numérico (0 - domingo a 6 - sábado);
+z - Dia do ano (0 a 365);
+
+Semana
+W - Semana no ano;
+
+Mês
+m - Mostra o mês em formato de número com dois dígitos;
+n - Mês no ano, sem zero à esquerda;
+F - Mês, nome completo (January a December);
+M - Mostra o mês em formato de texto com três dígitos (em inglês);
+
+Ano
+L - Retorna 1 se for ano bissexto;
+Y - Mostra o ano em formato de número com quatro dígitos.
+y - Mostra o ano em formato de número com dois dígitos;
+
+
+Exemplos com diversos formatos:
+
+<?php
+ echo date('d/m/y') . '<br />'; // Resultado: 18/03/13
+
+ echo date('D/M/Y') . '<br />'; // Resultado: Mon/Mar/2013
+
+ echo date('l/m/Y'); // Resultado: Monday/03/2013
+?>
 */
 
 //----------------------------------------------------------------------------//

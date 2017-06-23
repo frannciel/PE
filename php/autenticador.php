@@ -43,7 +43,7 @@ if($usuario){
 		$_SESSION['email']	= $email ;
 		$_SESSION['senha']	= $senha ;
 		$_SESSION["id"] = $usuario->id;
-		header("location:../views/form_enviar.php");
+		header("location:../views/home.php");
 	}else{
 		header("location:../index.php");
 	}

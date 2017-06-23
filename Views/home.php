@@ -139,83 +139,99 @@
                         </tr>
                      </thead>
                      <tbody>
-                     <?php foreach($emails as  $email) { ?>
-                        <tr>
-                           <td>
-                              <table class="tabela" style="margin-bottom: 5px">
-                                 <tr data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $email->id; ?>" aria-expanded="false" aria-controls="collapseOne">
-                                    <td class="celula"><?php echo $email->nome_destinatario; ?></td>
-                                    <td class="celula"><?php echo $email->assunto; ?></td>
-                                    <td class="td-date"><?php echo $email->data; ?></td>
-                                    <td class="td-icon centro">
-                                       <button type="button" class="btn btn-default btn-xs" title="Recebido com sucesso">
-                                          <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:#3ADF00"></span>
-                                       </button>
-                                    </td>
-                                 </tr>
-                              </table> 
+                     <?php if ($emails) { ?>
+                        <?php foreach($emails as  $email) { 
+                           $anexos = getAnexos($email->id);
+                           $destinatarios = getDetinatarios($email->id);
+                        ?>
+                           <tr>
+                              <td>
+                                 <table class="tabela" style="margin-bottom: 5px">
+                                    <tr data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $email->id; ?>" aria-expanded="false" aria-controls="collapseOne">
+                                       <td class="celula"><?php echo $email->nome_destinatario; ?></td>
+                                       <td class="celula"><?php echo $email->assunto; ?></td>
+                                       <td class="td-date"><?php echo $email->data; ?></td>
+                                       <td class="td-icon centro">
+                                          <?php if ( $destinatarios) { ?>
+                                             <button type="button" class="btn btn-default btn-xs" title="Recebido com sucesso">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:#3ADF00"></span>
+                                             </button>
+                                          <?php } else { ?>
+                                             <button type="button" class="btn btn-default btn-xs" title="Aguardando Recebimento">
+                                                <span class="glyphicon glyphicon-send" aria-hidden="true" style="color:#3ADF00"></span>
+                                             </button>
+                                          <?php } ?>
+                                       </td>
+                                    </tr>
+                                 </table> 
 
-                              <div id="collapse<?php echo $email->id; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-                                 
-                                 <div class="panel">                                             
-                                    <div class="panel-heading" style="background-color: #fcf8e3;">
-                                       <div class="row">
-                                          <div class="col-md-8">
-                                             <b>De:</b><?php echo $email->email_destinatario; ?>
-                                          </div>
+                                 <div id="collapse<?php echo $email->id; ?>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel">                                             
+                                       <div class="panel-heading" style="background-color: #fcf8e3;">
+                                          <div class="row">
+                                             <div class="col-md-8">
+                                                <b>De:</b><?php echo $email->email_destinatario; ?>
+                                             </div>
 
-                                          <div class="col-md-4">
-                                             <?php echo $email->data; ?>
-                                          </div>
+                                             <div class="col-md-4">
+                                                <?php echo $email->data; ?>
+                                             </div>
 
-                                          <div class="col-md-12">
-                                             <b>Para:</b> <?php echo $email->nome_destinatario; ?> &#60<?php echo $email->email_destinatario; ?>&#62 
-                                          </div> 
+                                             <div class="col-md-12">
+                                                <b>Para:</b> <?php echo $email->nome_destinatario; ?> &#60<?php echo $email->email_destinatario; ?>&#62 
+                                             </div> 
 
-                                           <div class="col-md-12">
-                                              <b>Codigo Envio: <?php echo $email->codigo_envio; ?></b> 
-                                          </div>  
+                                              <div class="col-md-12">
+                                                 <b>Codigo Envio: <?php echo $email->codigo_envio; ?></b> 
+                                             </div>  
 
-                                           <div class="col-md-12">
-                                             <b>Anexos:</b>
-                                             <?php foreach (getAnexos($email->id) as $anexo) { ?>
-                                                [ <a href="<?php echo $anexo->link; ?>"><?php echo $anexo->documento; ?></a> ], 
-                                             <?php } ?>
-                                          </div>  
-                                            
-                                          <div class="col-md-12">
-                                             <b>Assunto:</b> <?php echo $email->assunto; ?>
+                                              <div class="col-md-12">
+                                                <b>Anexos:</b>
+                                                <?php foreach (getAnexos($email->id) as $anexo) { ?>
+                                                   [ <a href="<?php echo $anexo->link; ?>"><?php echo $anexo->documento; ?></a> ]  
+                                                <?php } ?>
+                                             </div>  
+                                               
+                                             <div class="col-md-12">
+                                                <b>Assunto:</b> <?php echo $email->assunto; ?>
+                                             </div>
                                           </div>
                                        </div>
-                                    </div>
 
-                                    <div class="panel-body">
-                                       <?php echo $email->mensagem; ?>
-                                    </div>
+                                       <div class="panel-body">
+                                          <?php echo $email->mensagem; ?>
+                                       </div>
 
-                                    <div class="panel-footer" style="background-color: #fcf8e3;">
-                                       
-                                       <div class="row">
-                                       <?php foreach (getDetinatarios($email->id) as $destinatario) { ?>
-                                          <div class="col-md-12" style="margin-bottom: 1%">
-                                             <b>Recebido por:</b>
-                                          </div>
+                                       <div class="panel-footer" style="background-color: #fcf8e3;">
+                                          
+                                          <div class="row">
+                                          <?php if ($destinatarios) { ?>                                    
+                                             <?php foreach ($destinatarios as $destinatario) { ?>
+                                                <div class="col-md-12" style="margin-bottom: 1%">
+                                                   <b>Recebido por:</b>
+                                                </div>
 
-                                          <div class="col-md-9">
-                                                <?php echo $destinatario->nome." - ".$destinatario->cargo; ?>
-                                          </div>
+                                                <div class="col-md-9">
+                                                      <?php echo $destinatario->nome." - ".$destinatario->cargo; ?>
+                                                </div>
 
-                                          <div class="col-md-3" style="margin-bottom: 1%">
-                                             <button type="button" class="btn btn-success btn-xs">Visualizar Recibo </button>
-                                          </div>
-                                       <?php  } ?>
-                                       </div>                                 
-                                    </div>
-                                 </div>
-                              </div>
-                           </td>
-                        </tr>
-                     <?php } ?>
+                                                <div class="col-md-3" style="margin-bottom: 1%">
+                                                   <button type="button" class="btn btn-success btn-xs">Visualizar Recibo </button>
+                                                </div>
+                                             <?php  } ?>
+                                          <?php } else {?>
+                                             <center><i> Aguardando Recebimento</i> </center> 
+                                          <?php }  ?>
+                                          </div>                                 
+                                       </div> <!--painel footer -->
+                                    </div><!--painel -->
+                                 </div><!-- collapse -->
+                              </td>
+                           </tr>
+                        <?php } ?>
+                     <?php } else {?>
+                        <tr><td><center><i> Nenhum email enviado </i></center></td></tr>
+                     <?php }  ?>
                      </tbody>
                   </table>                   
                </div>
