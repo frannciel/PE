@@ -32,7 +32,7 @@
 					<h4>Código de envio nº <?php echo $_SESSION['codigo'];  ?></h4>
 				</div>
 				<div class="col-lg-4 col-md-offset-4 margem ">
-					<a class="btn btn-success btn-block" href="form_enviar.php">ok</a>
+					<a class="btn btn-success btn-block" href="home.php">ok</a>
 				</div>
 			</div>
 		</div>
