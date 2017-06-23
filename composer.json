@@ -1,0 +1,14 @@
+{
+    "name": "Protoco Eletrônico",
+    "description": "Envio eletrônico de documentos",
+    "authors": [
+        {
+            "name": "Franciel Castro",
+            "email": "frannciel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8",
+        "google/apiclient": ">=2.0"
+    }
+}
