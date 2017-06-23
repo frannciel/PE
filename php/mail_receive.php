@@ -74,16 +74,16 @@ function db_insert_usuario($id_email) {
 
 	try 
 	{
-		$sql = "INSERT INTO usuario (nome, cargo, telefone, email, data, id_email) 
+		$sql = "INSERT INTO destinatario (nome, cargo, telefone, email, data, id_email) 
 		VALUES (:nome, :cargo, :telefone, :email, :data, :id_email)";
 
 		$conn = $PDO->prepare($sql);
 		$conn->bindValue(":nome", 		$nome);
-		$conn->bindValue(":cargo", 	$cargo);
-		$conn->bindValue(":telefone", $telefone);
-		$conn->bindValue(":email", 	$email_destin);
-		$conn->bindValue(":id_email", $id_email);
+		$conn->bindValue(":cargo", 		$cargo);
+		$conn->bindValue(":telefone",	$telefone);
+		$conn->bindValue(":email",		$email_destin);
 		$conn->bindValue(":data", 		$data);
+		$conn->bindValue(":id_email", 	$id_email);
 		$conn->execute();
         
 	} catch (Exception $e) {

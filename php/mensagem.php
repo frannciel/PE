@@ -16,7 +16,7 @@
 			</table>
 
 			<p>
-				<a href='http://localhost/Sendark/form_receber.php?codigo=<?php echo $codigo_envio;?>'>
+				<a href='http://localhost/protocolo/views/form_receber.php?codigo=<?php echo $codigo_envio;?>'>
 					<h4>Click aqui para ter acesso aos documentos em anexo</h4>
 				</a>
 			</p>

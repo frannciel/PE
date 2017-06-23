@@ -14,12 +14,12 @@ $email_servidor 	= "pyngolee@gmail.com";
 $cpf_cnpj       	= preg_replace("/[^0-9\s]/", "", getPost("cpf_cnpj"));
 $documentos     	= getPost("documento");
 $links				= getPost("link");
-$assunto        	= getAssunto(getPost("assunto"));
+$assunto        	= getPost("assunto");
 $email_destin   	= email_validar(getPost("email"));
 $nome_destin        = getPost("nome");
 $codigo_envio       = getCodigo_envio();
-$texto              = nl2br(getPost("mensagem")); // mensagem recebida pelo usuário
-$mensagem   		= getMensagem($texto);
+$texto              = nl2br(getPost("mensagem")); // mensagem recebida do usuário
+$mensagem   		= getMensagem($texto);// mensagem recebido e tratada pelo sistema
 
 // Dados que serão utilizados na pagina de sucesso ou erro //
 
@@ -79,7 +79,7 @@ function email_enviar() {
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
   
-  	return mail($email_destin, $assunto, $mensagem, $headers);
+  	return mail($email_destin, getAssunto($assunto), $mensagem, $headers);
 }
 //-------------------------------------------------------------------------//
 /*
