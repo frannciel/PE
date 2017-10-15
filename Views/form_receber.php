@@ -1,8 +1,6 @@
 ﻿<?php 
-   session_start();
-   if (!isset($_SESSION["email"]) || !isset($_SESSION["senha"])) {
-      header("location:../index.php");
-   }
+   session_start(); // Inicia a sessão
+   $_SESSION['ok']  = "ok";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,19 +14,29 @@
     <!-- Funções para validação de CPF e CNPJ -->
     <script src="../js/valida_cpf_cnpj.js"></script>
 </head>
-<body>
+<body class="corpo">
+   <div class="nav barra">
+      <div class="container-fluid">
+         <div class="row barra-padding">
+            <div class="col-md-1" id="padding-zero">
+               <div><a href="#"><img src="../img/logo-clara.png" width="60" height="70" align="right"  ></a></div>
+            </div>
+            <div class="col-md-9" >
+               <div class="barra-titulo">Instituto Federal da Bahia</div>
+               <div class="barra-sub-titu">Campus Eunápolis</div>
+            </div>
+         </div>
+         <div class="row barra-inferior">
+            <div class="col-md-11">Remessa Eletrônica de Documentos Institucionais</div>
+         </div>
+      </div>
+   </div>
+
 	<div class="container">
 		<div class="content col-lg-8 col-md-offset-2">
-         <div class="panel panel-success">
-             
-            <div class="panel-heading">
-               <div class="row titulo">
-                  <h2>Protocolo Eletrônico</h2>
-                  <h5>Preencha este formulário para baixar os documentos em anexo</h5>
-               </div>
-            </div>
-
+         <div class="panel panel-margim">
             <div class="panel-body">
+               <h5>Preencha este formulário para baixar os documentos em anexo</h5>
                <form action="../php/mail_receive.php" method="POST">
 
                   <div class="well well-lg">
@@ -84,7 +92,7 @@
                   <p> Os campos com (*) são de preenchimento obrigatório</p>
                   <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                   <div class="row">
-                     <div class="col-lg-8 col-md-offset-2">
+                     <div class="col-lg-12">
                         <button type="submit" class="btn btn-primary btn-block">Receber Arquivo</button>
                      </div>
                   </div>
@@ -101,21 +109,28 @@
 </script>
 <script>
    $(function(){
-	    // Aciona a validação ao sair do input
+      /*
+      * Chama a função que formata e vefirica o cpf ou cnpj informado no campo CPF/CNPJ
+      * Aciona a validação ao sair do input
+      */
 	    $('#cpf_cnpj').blur(function(){
 	        // O CPF ou CNPJ
 	        var cpf_cnpj = $(this).val();
 	        if(cpf_cnpj.length > 0)
 	        {
 		        // Testa a validação
-		        if ( valida_cpf_cnpj(cpf_cnpj )) 
-		        {
-		            $(this).val(formata_cpf_cnpj(cpf_cnpj));
-		        } else {
+               if ( valida_cpf_cnpj(cpf_cnpj )) 
+	            {
+                  $(this).val(formata_cpf_cnpj(cpf_cnpj));
+	            } else {
 		            alert('CPF ou CNPJ inválido!');
 		        }
-	   		 }
+            }
 	    });
+       /*
+       * Função que valida e formata o telefone inserido no campo telefone
+       * A função e acionada ao sair do input emite um alerta em caso de erro
+       */
 	    $('#fone').blur(function(){
 	    	
 	    	var dados = $(this).val();

@@ -1,10 +1,8 @@
-
 .margem {
 	margin-top:2%;
 	margin-bottom: 2%;
 	text-align: center;
 }
-
 .titulo{
 	text-align: center;
 	margin-bottom: 2%;
@@ -32,3 +30,36 @@
 	background: #fff;
 	padding: 1%;
 }
+.barra{
+	background: #fff; 
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0.06), 0 2px 5px 0 rgba(0,0,0,0.2);
+	color: #19882c;
+}
+.barra-inferior{
+	background: #19882c;
+	color: #fff;
+	font-size: 20px;
+	padding-left: 40px;
+}
+.corpo {
+	background: #ddd;
+}
+.barra-titulo{
+	
+	font-size: 30px;
+	font-weight: bold;
+}
+.barra-sub-titu{
+	color: #19882c;
+	font-size: 20px;
+}
+.barra-padding{
+	padding: 5px;
+}
+.panel-margim{
+	margin-top: 5%;
+}
+#padding-zero{
+	padding: 0px;
+}
+#

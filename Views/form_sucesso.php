@@ -15,7 +15,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Funções para validação de CPF e CNPJ -->
 </head>
-<body>
+<body class="corpo">
+   <div class="nav barra">
+      <div class="container-fluid">
+         <div class="row barra-padding">
+            <div class="col-md-1" id="padding-zero">
+               <div><a href="https://portal.ifba.edu.br/eunapolis"><img src="../img/logo-clara.png" width="60" height="70" align="right"  ></a></div>
+            </div>
+            <div class="col-md-9" >
+               <div class="barra-titulo">Instituto Federal da Bahia</div>
+               <div class="barra-sub-titu">Campus Eunápolis</div>
+            </div>
+            <div class="col-md-2">
+               <img  src="../img/usuario.png" class="img-circle " width="70" height="70" align="right">
+            </div>
+         </div>
+         <div class="row barra-inferior">
+            <div class="col-md-11">Remessa Eletrônica de Documentos Institucionais</div>
+         </div>
+      </div>
+   </div>
+   
 	<div class="container">
 		<div class="content col-lg-8 col-md-offset-2">
 			<!-- ~~~~~~~~~~~~~~~~~Cabeçalho~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->

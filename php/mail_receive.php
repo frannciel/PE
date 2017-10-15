@@ -1,41 +1,36 @@
 <?php
 
-
 session_start(); // Inicia a sessão
-require_once "../bd/conexao.php";
+if (!isset($_POST["codigo"]) || !isset($_POST["cpf_cnpj"])) {
+      header("location:../views/form_receber.php");
+}
+require_once 'controller.php';
 
-$PDO = Conexao::getInstance();
 $email_remetente 	= "pyngolee@gmail.com";
 $email_servidor 	= "pyngolee@gmail.com";
 
 //<><><><><><><><><> Informações recebidas do formulário via POST  <><><><><><>><><><>//
-$codigo_envio  = preg_replace("/[^0-9\s]/", "", getPost("codigo"));
-$cpf_cnpj      = preg_replace("/[^0-9\s]/", "", getPost("cpf_cnpj"));
+$codigo_envio 	= preg_replace("/[^0-9\s]/", "", getPost("codigo"));
+$cpf_cnpj     	= preg_replace("/[^0-9\s]/", "", getPost("cpf_cnpj"));
 $telefone		= preg_replace("/[^0-9\s]/", "", getPost("telefone"));
 $nome 			= getPost("nome");
 $cargo			= getPost("cargo");
 $email_destin	= email_validar(getPost("email"));
 //<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><<><><<><<<><><><><>//
 
-$_SESSION['codigo']		= $codigo_envio ;
-$_SESSION['cpf_cnpj']	= $cpf_cnpj ;
-$_SESSION['nome'] 		= $nome ;
-$_SESSION['cargo'] 		= $cargo ;
-$_SESSION['telefone']	= $telefone ;
-$_SESSION['email'] 		= $email_destin ;
+$email = Controller::getEmail(array('codigo_envio', $codigo_envio));
 
-$result = db_select_email($codigo_envio);
+if($codigo_envio == $email->codigo_envio && $cpf_cnpj == $email->cpf_cnpj && $email_destin){
 
-if($codigo_envio == $result->codigo_envio && $cpf_cnpj == $result->cpf_cnpj && $email_destin){
-	
-	db_insert_usuario($result->id);
-	$recibo = getRecibo($result);
-	email_enviar(getAssunto($result->codigo_envio), $recibo);
-	echo $recibo;
-	//b_select_anexo($result->id);
-	//http_redirect("download.php");
+	$id_destinatario = db_insert_destinatario($email->id);
+
+	$_SESSION['id_destinatario'] = $id_destinatario;
+	$_SESSION['id_email'] = $email->id;
+	email_enviar(getAssunto($email->codigo_envio), getRecibo());
+	//header("location:../views/download.php");
+	//echo $id_destinatario;
+	echo getRecibo();
 }
-$PDO = NULL;
 
 //------------------------------------------------------------------------//
 function getPost($valor) {
@@ -64,72 +59,47 @@ function email_enviar($assunto, $mensagem) {
 }
 //-------------------------------------------------------------------------//
 /*
-    Metodo que registra no banco os dados do usuário que recebeu os documentos
-    Este metodo recebo o id do email que contem os anexos 
+*@Description Chama o meto do controle que cria novo gestro na tabela de destinatario
+* 			  apos fazer as verificações se o usuario já existe
+*@Param id do email ao qual pertence os anexos que o destinatário deseja receber
+*@Return id do novo destinatario que acabou de cadastrar
 */
-function db_insert_usuario($id_email) {
+function db_insert_destinatario($id_email) {
 
-	global $PDO, $nome, $cargo, $telefone, $email_destin;
-	$data = date('d/m/Y');
+	global $nome, $cargo, $telefone, $email_destin;
+	// id do destinatario
+	$id = '';
+	// Retorna todos os destinatarios que receberam os anexos enviados por email
+	$destinatarios = Controller::getDestinatarios(array('id_email', $id_email));
 
-	try 
-	{
-		$sql = "INSERT INTO destinatario (nome, cargo, telefone, email, data, id_email) 
-		VALUES (:nome, :cargo, :telefone, :email, :data, :id_email)";
-
-		$conn = $PDO->prepare($sql);
-		$conn->bindValue(":nome", 		$nome);
-		$conn->bindValue(":cargo", 		$cargo);
-		$conn->bindValue(":telefone",	$telefone);
-		$conn->bindValue(":email",		$email_destin);
-		$conn->bindValue(":data", 		$data);
-		$conn->bindValue(":id_email", 	$id_email);
-		$conn->execute();
-        
-	} catch (Exception $e) {
-		print("Ocorreu ao tentar salvar usuario tente novamnete ou contate o Administrador");
-		print($e->getMessage());
+    // verifica se o destinatário já recebeu os anexos anteriormente, em caso positivo insere seu id na vaiável 
+	foreach ($destinatarios as  $destinatario) {
+		echo "string1";
+    	if ($destinatario->nome == $nome && $destinatario->cargo == $cargo && $destinatario->email == $email_destin) {
+    		echo "string2";
+    		$id = $destinatario->id;
+    	}
 	}
+	//se a variável ainda está nula salva os dados do destinatario recebedor no banco de dados e insere seu id na variável
+	if(empty($id)){
+		echo "string3";
+		$id = Controller::setDestinatario(array($nome, $cargo, $telefone, $email_destin, $id_email));	
+	}
+	// Retorna o id destinatario reccebedor salvo no banco de dados
+	return $id;
 }
-
-
-function db_select_email($codigo_envio){
-
-	global $PDO;
-	$sql = $PDO->query("SELECT * FROM email WHERE codigo_envio = ".$codigo_envio);
-	$result = $sql->fetch(PDO::FETCH_OBJ);
- 	return $result;
-
-/* segunda forma
-$result = $select->fetchAll(PDO::FETCH_ASSOC);
-print_r($result);
- 
-//terceira forma
-$result = $select->fetch(PDO::FETCH_OBJ);
-echo $result->titulo;
-echo $result->descricao;
+//-------------------------------------------------------------------------//
+/*
+*@Description Função que utilizando buffer gera o recibo de recebimeto 
+*@Return o codigo html contendo o recibo de entrega recebimento dos anexos
 */
-}
-function getRecibo($result_email){
-
-	global $PDO, $nome, $cargo, $telefone, $email_destin;
-
-	$result_anexo = db_select_anexo($result_email->id);
-	//$ipEndress = getenv("REMOTE_ADDR");
-	$ipEndress = $_SERVER["REMOTE_ADDR"];
+function getRecibo(){
 
 	ob_start();
-	include("recibo.php");
+	include("create_recibo.php");
 	$recibo = ob_get_contents();
 	ob_end_clean();
 	return $recibo;
 }
-
-function db_select_anexo($id_email){
-
-	global $PDO;
-	$sql = $PDO->query("SELECT * FROM anexo WHERE id_email = ".$id_email);
- 	return $sql->fetchAll(PDO::FETCH_OBJ);
-}
-
+//-------------------------------------------------------------------------//
 ?>
