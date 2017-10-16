@@ -3,7 +3,8 @@
 echo "começo ";
 $PDO = Conexao::getInstance();
 $sql = $PDO->query("SELECT * FROM usuario WHERE 'email' = 'frannciel@gmail.com'");
-print_r($sql->fetch(PDO::FETCH_OBJ));
+$user = $sql->fetch(PDO::FETCH_OBJ);
+echo($user->nome);
 echo "Chegou ";
 
 class Conexao {
