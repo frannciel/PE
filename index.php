@@ -5,8 +5,6 @@ var_dump($PDO);
 $sql = $PDO->query("SELECT * FROM usuario WHERE  'email' = frannciel@gmail.com'");
 var_dump($sql->fetch(PDO::FETCH_OBJ));
   		  
-$usuario = Controller::getUsuario(array('email', 'frannciel@gmail.com'));		 
-
 class Conexao {
   		  
    private function __construct() {
