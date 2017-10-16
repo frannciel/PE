@@ -1,6 +1,5 @@
 ﻿<?php
 
-<?php
 $dbstr = getenv('CLEARDB_DATABASE_URL');
 $dbstr = substr("$dbstr", 8);
 $dbstrarruser = explode(":", $dbstr);
