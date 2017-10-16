@@ -3,7 +3,7 @@
 $PDO = Conexao::getInstance();
 $sql = $PDO->query("SELECT * FROM usuario WHERE  'email' = frannciel@gmail.com'");
 var_dump($sql->fetch(PDO::FETCH_OBJ));
-
+echo "Chegou ";
 class Conexao {
 
     public static $instance;
