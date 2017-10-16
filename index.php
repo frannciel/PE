@@ -1,6 +1,6 @@
 ﻿<?php
 
-require_once 'controller.php';
+require_once 'php/controller.php';
 
 $usuario = Controller::getUsuario(array('email', 'frannciel@gmail.com'));
 
