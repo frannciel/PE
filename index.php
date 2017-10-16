@@ -12,10 +12,10 @@ echo "Chegou ";
 
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$server = $url["us-cdbr-iron-east-05.cleardb.net"];
-$username = $url["b9fb1bd306346b"];
-$password = $url["12f65fd4"];
-$db = substr($url["heroku_a2e65a5cd7ae39b"], 1);
+$server = "us-cdbr-iron-east-05.cleardb.net";
+$username = "b9fb1bd306346b";
+$password = "12f65fd4";
+$db = "heroku_a2e65a5cd7ae39b";
 
 $conn = new mysqli($server, $username, $password, $db);
 
