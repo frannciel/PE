@@ -3,7 +3,7 @@
 echo "começo ";
 $PDO = Conexao::getInstance();
 $sql = $PDO->query("SELECT * FROM usuario WHERE 'email' = 'frannciel@gmail.com'");
-var_dump($sql->fetch(PDO::FETCH_OBJ));
+print_r($sql->fetch(PDO::FETCH_OBJ));
 echo "Chegou ";
 
 class Conexao {
@@ -21,8 +21,9 @@ class Conexao {
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
             }
-            return self::$instance;
             echo "Conetado ";
+            return self::$instance;
+
         } catch(PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();
         }
