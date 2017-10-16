@@ -1,5 +1,5 @@
 ﻿<?php
-
+/*
 echo "começo ";
 $PDO = Conexao::getInstance();
 $sql = $PDO->query("SELECT * FROM usuario WHERE 'email' = 'frannciel.edu@gmail.com'");
@@ -8,30 +8,21 @@ echo($user->nome);
 print_r($user->nome);
 var_dump($user);
 echo "Chegou ";
+*/
 
-class Conexao {
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-    public static $instance;
+$server = $url["us-cdbr-iron-east-05.cleardb.net"];
+$username = $url["b9fb1bd306346b"];
+$password = $url["12f65fd4"];
+$db = substr($url["heroku_a2e65a5cd7ae39b"], 1);
 
-    private function __construct() {
-        //
-    }
+$conn = new mysqli($server, $username, $password, $db);
 
-    public static function getInstance() {
-        try{
-            if (!isset(self::$instance)) {
-                self::$instance = new PDO('mysql:host=us-cdbr-iron-east-05.cleardb.net;dbname=heroku_a2e65a5cd7ae39b', 'b9fb1bd306346b', '12f65fd4', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
-                echo "Conectando ";
-            }
-            echo "Conectado ";
-            return self::$instance;
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+echo "Connected successfully";
 
-        } catch(PDOException $e) {
-            echo 'ERROR: ' . $e->getMessage();
-        }
-
-    }
-}
 ?>
