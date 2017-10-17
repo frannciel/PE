@@ -7,10 +7,7 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-echo $db . " - name<br>";
-echo $server . " - host<br>";
-echo $username . " - user<br>";
-echo $password . " - passsword<br>";
+
 
 $conn = new mysqli_connect($server, $username, $password, $db);
 
@@ -24,5 +21,10 @@ $sql = "SELECT * FROM usuario";
 $query = $conn->query($sql);
 echo 'Registros encontrados: ' . $query->num_rows;
 
+
+echo $db . " - name<br>";
+echo $server . " - host<br>";
+echo $username . " - user<br>";
+echo $password . " - passsword<br>";
 ?>
 
