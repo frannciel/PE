@@ -26,12 +26,16 @@ echo $dbuser . " - user<br>";
 echo $dbpassword . " - passwd<br>";
 
 $dbanfang = 'mysql:host=' . $dbhost . ';dbname=' . $dbname;
-$db = new PDO($dbanfang, $dbuser, $dbpassword);
+$PDO = new PDO($dbanfang, $dbuser, $dbpassword);
+$PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
+var_dump($PDO);
 //You can only use this with the standard port!
-var_dump($db);
-$sql = $db->query("SELECT * FROM usuario WHERE 'email' = 'frannciel.edu@gmail.com'");
+
+$sql = $PDO->query("SELECT * FROM usuario WHERE 'id' = '1'");
 $user = $sql->fetch(PDO::FETCH_OBJ);
-echo($user->nome);
+echo("Dados do usuario \n")
+var_dump($user);
 ?>
 
 
