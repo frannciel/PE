@@ -14,9 +14,11 @@ echo $server . " - host<br>";
 echo $username . " - user<br>";
 echo $password . " - password<br>";
 
-echo $conn;
+echo( $conn);
 var_dump($conn);
-echo "-------------------------------------------------------------------------------------------------";
+echo ("-------------------------------------------------------------------------------------------------");
+echo( "Fim do msqli");
+
 
 $dbstr = getenv('CLEARDB_DATABASE_URL');
 $dbstr = substr("$dbstr", 8);
