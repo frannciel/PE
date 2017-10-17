@@ -7,13 +7,25 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-$conn = new mysqli($server, $username, $password, $db);
-
 echo $db . " - name<br>";
 echo $server . " - host<br>";
 echo $username . " - user<br>";
 echo $password . " - passsword<br>";
-echo("Fim do msqli");
+
+// Conecta-se ao banco de dados MySQL
+$conn = new mysqli($server, $username, $password, $db);
+
+// Caso algo tenha dado errado, exibe uma mensagem de erro
+if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
+
+// Executa uma consulta que pega cinco notícias
+$sql = "SELECT * FROM `usuario`";
+$query = $conn->query($sql);
+while ($dados = $query->mysqli_fetch_array()) {
+  echo 'ID: ' . $dados['id'] . '';
+  echo 'Nome: ' . $dados['nome'] . '';
+}
+echo 'Registros encontrados: ' . $query->num_rows;
 
 
 $dbstr = getenv('CLEARDB_DATABASE_URL');
