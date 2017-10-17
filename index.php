@@ -1,3 +1,5 @@
+//https://www.kinghost.com.br/wiki/artigo/como-conectar-um-banco-de-dados-mysql-utilizando-php/
+
 <?php
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
