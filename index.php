@@ -4,12 +4,9 @@ $server = $url["host"];
 $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
-
-
-echo 'Conectado com sucesso';
-mysql_close($link);
 echo $db . " - name<br>";
 $conn = new mysqli_connect($server, $username, $password, $db);
+echo $db . " - name<br>";
 if (!$conn) {
     echo "Error: Falha ao conectar-se com o banco de dados MySQL." . PHP_EOL;
     echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
