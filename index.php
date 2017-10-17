@@ -16,10 +16,8 @@ if (mysqli_connect_errno()) {
 
 $sql = "SELECT * FROM `usuario`";
 $query = $conn->query($sql);
-echo 'Registros encontrados: ' . $query->num_rows;
 $dados = $query->fetch_array();
 print_r($dados);
-
 echo 'Registros encontrados: ' . $query->num_rows;
 
 $conn->close();
