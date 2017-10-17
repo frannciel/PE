@@ -12,12 +12,8 @@ $conn = new mysqli($server, $username, $password, $db);
 echo $db . " - name<br>";
 echo $server . " - host<br>";
 echo $username . " - user<br>";
-echo $password . " - password<br>";
-
-echo( $conn);
-var_dump($conn);
-echo ("-------------------------------------------------------------------------------------------------");
-echo( "Fim do msqli");
+echo $password . " - passsword<br>";
+echo("Fim do msqli");
 
 
 $dbstr = getenv('CLEARDB_DATABASE_URL');
