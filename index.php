@@ -8,13 +8,13 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-$conn = new mysqli($server, $username, $password, $db);
-
+//$conn = new mysqli($server, $username, $password, $db);
+$conn = new PDO("mysql:host=HOST;dbname=BASE", "USUARIO", "SENHA"); 
 //check connection 
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
-}
+//if (mysqli_connect_errno()) {
+    //printf("Connect failed: %s\n", mysqli_connect_error());
+   // exit();
+//}
 
 $sql = "SELECT * FROM `usuario`";
 $query = $conn->query($sql);
