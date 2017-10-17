@@ -10,8 +10,7 @@ echo $server . " - host<br>";
 echo $username . " - user<br>";
 echo $password . " - passsword<br>";
 $conn = new mysqli($server, $username, $password, $db);
-if (mysqli_connect_errno()) trigger_error(mysqli_connect_error());
-$sql = "SELECT * FROM `usuario`";
+$sql = "SELECT * FROM usuario";
 $query = $conn->query($sql);
 while ($dados = $query->mysqli_fetch_array()) {
   echo 'ID: ' . $dados['id'] . '';
