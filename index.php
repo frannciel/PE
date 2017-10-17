@@ -11,12 +11,9 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $conn->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING)   
 echo 'Conectado </br>';
 
-var_dump($conn);
-$sql = "SELECT * FROM `usuario`";
-$query = $conn->query($sql);
-$dados = $query->fetch_array();
+$sql = $conn->query("SELECT * FROM usuario");
+$dados = $sql->fetch(PDO::FETCH_OBJ);
 print_r($dados);
-echo 'Registros encontrados: ' . $query->num_rows;
 
-$conn->close();
+//$sql = "SELECT * FROM `usuario`";
 ?>
