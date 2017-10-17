@@ -29,7 +29,7 @@ $dbanfang = 'mysql:host=' . $dbhost . ';dbname=' . $dbname;
 $PDO = new PDO($dbanfang, $dbuser, $dbpassword);
 $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $PDO->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
-var_dump($PDO);
+var_dump($PDO->query("SELECT * FROM usuario WHERE 'id' = '1'"));
 //You can only use this with the standard port!
 
 $sql = $PDO->query("SELECT * FROM usuario WHERE 'id' = '1'");
