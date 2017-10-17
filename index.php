@@ -10,11 +10,6 @@ $db = substr($url["path"], 1);
 
 $conn = new PDO("mysql:host=".$server.";dbname=".$db.", $username, $password); 
 
-/*check connection 
-if (mysqli_connect_errno()) {
-   printf("Connect failed: %s\n", mysqli_connect_error());
-   exit();
-}*/
 
 var_dump($conn);
 $sql = "SELECT * FROM `usuario`";
