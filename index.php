@@ -28,6 +28,10 @@ echo $dbpassword . " - passwd<br>";
 $dbanfang = 'mysql:host=' . $dbhost . ';dbname=' . $dbname;
 $db = new PDO($dbanfang, $dbuser, $dbpassword);
 //You can only use this with the standard port!
+var_dump($db);
+$sql = $db->query("SELECT * FROM usuario WHERE 'email' = 'frannciel.edu@gmail.com'");
+$user = $sql->fetch(PDO::FETCH_OBJ);
+echo($user->nome);
 ?>
 
 
