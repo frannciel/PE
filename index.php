@@ -10,7 +10,6 @@ $conn = new mysqli($server, $username, $password, $db);
 
 $sql = "SELECT * FROM `usuario`";
 $query = $conn->query($sql);
-var_dump($query);
-echo 'Registros encontrados: ' . $query->num_rows;
+var_dump($dados = $query->mysqli_fetch_array());
 
 ?>
