@@ -4,10 +4,8 @@ $server = $url["host"];
 $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
-$link = mysql_connect($server, $db, $password);
-if (!$link) {
-    die('Erro ao conectar ao banco: ' . mysql_error());
-}
+
+
 echo 'Conectado com sucesso';
 mysql_close($link);
 echo $db . " - name<br>";
