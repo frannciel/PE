@@ -34,7 +34,7 @@ var_dump($PDO);
 
 $sql = $PDO->query("SELECT * FROM usuario WHERE 'id' = '1'");
 $user = $sql->fetch(PDO::FETCH_OBJ);
-echo("Dados do usuario \n")
+echo("Dados do usuario \n");
 var_dump($user);
 ?>
 
