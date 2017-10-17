@@ -7,7 +7,9 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
-var_dump($conn);
-echo "conectado";
+
+$sql = "SELECT * FROM `usuario`";
+$query = $conn->query($sql);
+echo 'Registros encontrados: ' . $query->num_rows;
 
 ?>
