@@ -1,5 +1,24 @@
 ﻿<?php
 
+<?php
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
+
+echo $db . " - name<br>";
+echo $server . " - host<br>";
+echo $username . " - user<br>";
+echo $password . " - password<br>";
+
+echo $conn;
+var_dump($conn);
+echo "-------------------------------------------------------------------------------------------------";
+
 $dbstr = getenv('CLEARDB_DATABASE_URL');
 $dbstr = substr("$dbstr", 8);
 $dbstrarruser = explode(":", $dbstr);
