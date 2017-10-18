@@ -16,6 +16,7 @@ if($email != 1){
 	echo "passou 6";
 	if(!empty($senha)){
 		echo "passou 7";
+		echo ($usuario->senha);
 		if(password_verify($senha, $usuario->senha)){
 			echo "passou 8";
 			$_SESSION['email']	= $email ;
@@ -23,11 +24,13 @@ if($email != 1){
 			$_SESSION['id'] = $usuario->id;
 			//header("location:../views/home.php");
 		}else{
+			echo "passou 88";
 			$_SESSION['error']	= true;
 			$_SESSION['email']	= $email;
 			//header("location:../index.php");
 		}
 	}else{
+		echo "passou 888";
 		$_SESSION['error']	= true;
 		$_SESSION['email']	= $email ;
 		//header("location:../index.php");
