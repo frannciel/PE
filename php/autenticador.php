@@ -7,37 +7,25 @@ $senha = isset($_POST["senha"]) ? $_POST["senha"] : '';
 $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 // Busca o usuário no banco de dados usando como parametro o email coletado na tela de login
 if($email != 1){
-	echo "passou 4";
-	echo ($senha);
-	echo ($email);
-	$emails =  str_replace('\'','',str_replace('"','',$email ));
-	echo ($emails);
-	$usuario = Controller::getUsuario(array('email', $emails));
-	echo "passou 6";
+	$usuario = Controller::getUsuario(array('email', str_replace('\'','',str_replace('"','',$email ))));
 	if(!empty($senha)){
-		echo "passou 7";
-		echo ($usuario->senha);
 		if(password_verify($senha, $usuario->senha)){
-			echo "passou 8";
 			$_SESSION['email']	= $email ;
 			$_SESSION['senha']	= $senha ;
 			$_SESSION['id'] = $usuario->id;
-			//header("location:../views/home.php");
+			header("location:../views/home.php");
 		}else{
-			echo "passou 88";
 			$_SESSION['error']	= true;
 			$_SESSION['email']	= $email;
-			//header("location:../index.php");
+			header("location:../index.php");
 		}
 	}else{
-		echo "passou 888";
 		$_SESSION['error']	= true;
 		$_SESSION['email']	= $email ;
-		//header("location:../index.php");
+		header("location:../index.php");
 	}
 }else{
-	echo "passou 9";
 	$_SESSION['error']	= true;
 	$_SESSION['email']	= $email ;
-	//header("location:../index.php");
+	header("location:../index.php");
 }
