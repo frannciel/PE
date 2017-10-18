@@ -1,8 +1,6 @@
 <?php
 
-echo "passou 50";
 require_once '../bd/conexao.php';
-echo "passou 100";
 
 class Controller {
 
@@ -137,11 +135,8 @@ class Controller {
     *@Return Um objeto do tipo usuário
     */
     public static function getUsuario($request) {
-        echo "passou 10";
         $PDO = Conexao::getInstance();
-        echo "passou 11";
         $sql = $PDO->query("SELECT * FROM usuario WHERE ".$request[0]." = '".$request[1]."'");
-        echo "passou 12";
         return $sql->fetch(PDO::FETCH_OBJ);
     }
      /*
