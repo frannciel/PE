@@ -6,7 +6,7 @@
    if (!isset($_SESSION["email"]) || !isset($_SESSION["senha"])) {
       header("location:../index.php");
    }
-   
+   echo "Passou aqui 1";
    require_once '../php/controller.php';
 
    // retorna do banco de todos os emails ennviados pelo usuário ativo na sessão
