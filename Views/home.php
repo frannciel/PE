@@ -33,8 +33,9 @@ echo "Passou aqui 5";
    }else{
 echo "Passou aqui 6 ";
       $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));
+	   echo "Passou aqui7 ";
    }
-   echo "Passou aqui 7";
+   echo "Passou aqui 8";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
