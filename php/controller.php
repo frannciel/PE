@@ -1,7 +1,6 @@
 <?php
 
-
-include './bd/conexao.php';
+include '../bd/conexao.php';
 
 
 class Controller {
