@@ -1,7 +1,7 @@
 <?php
 
 echo "passou 50";
-require_once './bd/conexao.php';
+require_once '../bd/conexao.php';
 echo "passou 100";
 
 class Controller {
