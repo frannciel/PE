@@ -1,7 +1,7 @@
 <?php
 
 require_once '../bd/conexao.php';
-echo " passou 01";
+
 class Controller {
 
     public static $PDO;
@@ -9,6 +9,11 @@ class Controller {
     private function __construct() {
         //
     }
+    
+    public static function geTest(){
+         return "Chegou aki";
+    }
+        
     /*
     *@Description Metodo que cria o registro de um novo destinatario no banco de dados
     *@Param Um array contendo os dados do novo destinatario ser salvo no banco
@@ -134,10 +139,10 @@ class Controller {
     *@Return Um objeto do tipo usuário
     */
     public static function getUsuario($request) {
-        echo " passou 02";
+        echo "passou 01";
         $PDO = Conexao::getInstance();
         $sql = $PDO->query("SELECT * FROM usuario WHERE ".$request[0]." = '".$request[1]."'");
-        echo " passou 03";
+        echo "passou 02";
         return $sql->fetch(PDO::FETCH_OBJ);
     }
      /*
