@@ -3,37 +3,33 @@
    // caso não haja sessão indica que o usuario não está logado e o redireciona a tela de login
    // tha82274629 
    session_start();
-	echo "Passou aqui 1";
    if (!isset($_SESSION["email"]) || !isset($_SESSION["senha"])) {
       header("location:../index.php");
    }
-   echo "Passou aqui 1";
    require_once '../php/controller.php';
 
    // retorna do banco de todos os emails ennviados pelo usuário ativo na sessão
    // recebe o id do usuario através da sessão ativa
    //$emails = Controller::getEmails(array('id_usuario', $_SESSION["id"]));
-   echo "Passou aqui 2";
    $emails = '';
    $usuario = Controller::getUsuario(array('id', $_SESSION['id']));
    if (!empty($_POST)) {
-echo "Passou aqui 3";
+	echo "Passou aqui 3";
       $campo = $_POST['campo'];
       $termo = trim($_POST['termo']);
 
       if ($termo == ""){
-echo "Passou aqui 4";
+	echo "Passou aqui 4";
          $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));  
 
       } else{
-echo "Passou aqui 5";
+	echo "Passou aqui 5";
          $emails = Controller::getEmailsAjax(array($campo, "%".$termo."%", "id_usuario", $_SESSION['id']));
       }
 
    }else{
-echo "Passou aqui 6 ";
-      $emails = Controller::getEmail(array('id', $_SESSION['id']));
-	   echo "Passou aqui7 ";
+	   echo "Passou aqui 88";
+      $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));
    }
    echo "Passou aqui 8";
 ?>
