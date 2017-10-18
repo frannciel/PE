@@ -1,6 +1,11 @@
 <?php
 
-include 'pe/bd/conexao.php';
+include './bd/conexao.php';
+echo " parte 1";
+include '../bd/conexao.php';
+echo " parte 2";
+include 'PE/bd/conexao.php';
+echo " parte 3";
 
 class Controller {
 
