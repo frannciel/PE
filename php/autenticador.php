@@ -1,6 +1,6 @@
 <?php
 session_start(); // Inicia a sessão
-include 'controller.php';
+require_once 'controller.php';
 
 $email = isset($_POST["email"]) ? $_POST["email"] : '';
 $senha = isset($_POST["senha"]) ? $_POST["senha"] : '';
