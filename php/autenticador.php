@@ -8,7 +8,11 @@ $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 // Busca o usuário no banco de dados usando como parametro o email coletado na tela de login
 if($email != 1){
 	echo "passou 4";
-	$usuario = Controller::getUsuario(array('email', str_replace('\'','',str_replace('"','',$email ))));
+	echo ($senha);
+	echo ($email);
+	$emails =  str_replace('\'','',str_replace('"','',$email ));
+	echo ($emails);
+	$usuario = Controller::getUsuario(array('email', $emails));
 	echo "passou 6";
 	if(!empty($senha)){
 		echo "passou 7";
