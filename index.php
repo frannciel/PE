@@ -1,9 +1,5 @@
 <?php
 
-include 'php/controller.php';
-$usuario = Controller::geTest();
-echo ($usuario);
-
 //require_once 'bd/conexao.php';
 //$conn = Conexao::getInstance();
 //$sql = $conn->query("SELECT * FROM usuario");
