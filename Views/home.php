@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
    // inicia a sessão e verifica se existe uma sessão ativa para o usuario atual
    // caso não haja sessão indica que o usuario não está logado e o redireciona a tela de login
    // tha82274629 
@@ -6,6 +6,7 @@
    if (!isset($_SESSION["email"]) || !isset($_SESSION["senha"])) {
       header("location:../index.php");
    }
+   
    require_once '../php/controller.php';
 
    // retorna do banco de todos os emails ennviados pelo usuário ativo na sessão
