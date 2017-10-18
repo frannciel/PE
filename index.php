@@ -1,5 +1,7 @@
 <?php
 
+require_once 'php/controller.php';
+
 //require_once 'bd/conexao.php';
 //$conn = Conexao::getInstance();
 //$sql = $conn->query("SELECT * FROM usuario");
