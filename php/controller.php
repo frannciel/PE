@@ -1,6 +1,6 @@
 <?php
 
-include '../bd/conexao.php';
+include 'pe/bd/conexao.php';
 
 class Controller {
 
@@ -141,8 +141,8 @@ class Controller {
     public static function getUsuario($request) {
         echo "passou 01";
         $PDO = Conexao::getInstance();
-        $sql = $PDO->query("SELECT * FROM usuario WHERE ".$request[0]." = '".$request[1]."'");
         echo "passou 02";
+        $sql = $PDO->query("SELECT * FROM usuario WHERE ".$request[0]." = '".$request[1]."'");
         return $sql->fetch(PDO::FETCH_OBJ);
     }
      /*
