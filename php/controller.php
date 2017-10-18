@@ -197,7 +197,7 @@ class Controller {
     *@Return retorn um array de objetos emails 
     */
     public static function getEmails($request) {
-        echo " Controler 01"
+        echo " Controler 01";
         $PDO = Conexao::getInstance();
         $sql = $PDO->query("SELECT id, codigo_envio, cpf_cnpj, nome_destinatario, email_destinatario, assunto,  mensagem, date_format(data, '%d/%m/%Y %h:%m') AS data 
         FROM email WHERE ".$request[0]." LIKE '".$request[1]."'");
