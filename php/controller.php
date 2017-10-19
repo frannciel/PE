@@ -192,12 +192,23 @@ class Controller {
         return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     /*
-    *@Description Metodo que consulta os emails de acordo com um parametro
+    *@Description Metodo que consulta os emails de acordo com um parametro solicitado
     *@Param  recebe um array contendo como chave o atributo da tabela do banco e valor é o parametro da consulta
     *@Return retorn um array de objetos emails 
     */
     public static function getEmails($request) {
         echo " Controler 01";
+        $PDO = Conexao::getInstance();
+        $sql = $PDO->query("SELECT id, codigo_envio, cpf_cnpj, nome_destinatario, email_destinatario, assunto,  mensagem, date_format(data, '%d/%m/%Y %h:%m') AS data 
+        FROM email WHERE ".$request[0]." = '".$request[1]."'");
+        return $sql->fetchAll(PDO::FETCH_OBJ);
+    }
+    /*
+    *@Description Metodo que consulta os emails com parametros parcialmente conenhecidos exemplo um pedaço do nome
+    *@Param  recebe um array contendo como chave o atributo da tabela do banco e valor é o parametro da consulta
+    *@Return retorn um array de objetos emails 
+    */
+    public static function getBuscaEmails($request) {
         $PDO = Conexao::getInstance();
         $sql = $PDO->query("SELECT id, codigo_envio, cpf_cnpj, nome_destinatario, email_destinatario, assunto,  mensagem, date_format(data, '%d/%m/%Y %h:%m') AS data 
         FROM email WHERE ".$request[0]." LIKE '".$request[1]."'");
