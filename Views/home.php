@@ -13,6 +13,7 @@
    //$emails = Controller::getEmails(array('id_usuario', $_SESSION["id"]));
    $emails = '';
    $usuario = Controller::getUsuario(array('id', $_SESSION['id']));
+   print_r($usuario);
    if (!empty($_POST)) {
 	echo "Passou aqui 3";
       $campo = $_POST['campo'];
