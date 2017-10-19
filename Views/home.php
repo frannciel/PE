@@ -13,14 +13,11 @@
    //$emails = Controller::getEmails(array('id_usuario', $_SESSION["id"]));
    $emails = '';
    $usuario = Controller::getUsuario(array('id', $_SESSION['id']));
-   print_r($usuario);
    if (!empty($_POST)) {
-	echo "Passou aqui 3";
       $campo = $_POST['campo'];
       $termo = trim($_POST['termo']);
 
       if ($termo == ""){
-	echo "Passou aqui 4";
          $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));  
 
       } else{
@@ -29,7 +26,6 @@
       }
 
    }else{
-	   echo "Passou aqui 88";
       $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));
    }
    echo "Passou aqui 8";
