@@ -6,8 +6,5 @@
             "name": "Franciel Castro",
             "email": "frannciel@gmail.com"
         }
-    ],
-    "require": {
-        "php": ">=7.1.1"
-    }
+    ]
 }
