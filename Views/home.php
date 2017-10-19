@@ -29,7 +29,7 @@
 
    }else{
 	   echo "Passou aqui 88";
-      $emails = Controller::getEmail(array('id', $_SESSION['id']));
+      $emails = Controller::getEmails(array('id_usuario', $_SESSION['id']));
    }
    echo "Passou aqui 8";
 ?>
