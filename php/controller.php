@@ -201,7 +201,6 @@ class Controller {
         $PDO = Conexao::getInstance();
         echo " Controler 02";
         $sql = $PDO->query("SELECT id, codigo_envio, cpf_cnpj, nome_destinatario, email_destinatario, assunto,  mensagem, date_format(data, '%d/%m/%Y %h:%m') AS data 
-        echo " Controler 03";
        FROM email WHERE ".$request[0]." = '".$request[1]."'");
         echo " Controler 04";
        return $sql->fetchAll(PDO::FETCH_OBJ);
