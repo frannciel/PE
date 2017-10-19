@@ -199,9 +199,12 @@ class Controller {
     public static function getEmails($request) {
         echo " Controler 01";
         $PDO = Conexao::getInstance();
+        echo " Controler 02";
         $sql = $PDO->query("SELECT id, codigo_envio, cpf_cnpj, nome_destinatario, email_destinatario, assunto,  mensagem, date_format(data, '%d/%m/%Y %h:%m') AS data 
-        FROM email WHERE ".$request[0]." = '".$request[1]."'");
-        return $sql->fetchAll(PDO::FETCH_OBJ);
+        echo " Controler 03";
+       FROM email WHERE ".$request[0]." = '".$request[1]."'");
+        echo " Controler 04";
+       return $sql->fetchAll(PDO::FETCH_OBJ);
     }
     /*
     *@Description Metodo que consulta os emails com parametros parcialmente conenhecidos exemplo um pedaço do nome
